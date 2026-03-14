@@ -1,35 +1,168 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JORDAN ELITE | KEY SYSTEM</title>
     <style>
-        body { background: #0a0a0a; color: #0f0; font-family: 'Courier New', monospace; text-align: center; padding-top: 50px; }
-        .box { border: 2px solid #333; display: inline-block; padding: 20px; background: #111; border-radius: 10px; }
-        select, button { padding: 10px; margin: 10px; background: #222; color: #0f0; border: 1px solid #0f0; cursor: pointer; }
-        #keyDisplay { margin-top: 20px; font-weight: bold; font-size: 20px; display: none; }
+        /* Roblox Speed Game / Dark Mod Menu Style */
+        body {
+            background-color: #0f0f0f;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 8px;
+            width: 350px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .header {
+            background: #252525;
+            margin: -20px -20px 20px -20px;
+            padding: 15px;
+            border-bottom: 2px solid #007bff;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #007bff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #bbb;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            background: #000;
+            color: #0f0;
+            border: 1px solid #444;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background: #0056b3;
+            box-shadow: 0 0 10px #007bff;
+        }
+
+        #keyBox {
+            margin-top: 20px;
+            padding: 15px;
+            background: #000;
+            border: 1px dashed #0f0;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        #keyText {
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        .footer-text {
+            font-size: 10px;
+            color: #555;
+            margin-top: 15px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h1>JORDAN ELITE ACCESS</h1>
-        <p>Select your access duration:</p>
-        <select id="time">
-            <option>1 Day</option>
-            <option>1 Month</option>
-            <option>1 Year</option>
-            <option>Lifetime</option>
-        </select>
-        <br>
-        <button onclick="generateKey()">GENERATE KEY</button>
-        <div id="keyDisplay">YOUR KEY: <span id="keyText"></span></div>
+
+<div class="container">
+    <div class="header">JORDAN ELITE V2</div>
+    
+    <label for="duration">SELECT ACCESS DURATION</label>
+    <select id="duration">
+        <option value="1">1 DAY</option>
+        <option value="30">1 MONTH</option>
+        <option value="365">1 YEAR</option>
+        <option value="99999">LIFETIME</option>
+    </select>
+
+    <button onclick="generateKey()">Get Random Key</button>
+
+    <div id="keyBox">
+        <div style="font-size: 11px; color: #888; margin-bottom: 5px;">KEY COPIED TO CLIPBOARD:</div>
+        <div id="keyText"></div>
     </div>
 
-    <script>
-        function generateKey() {
-            document.getElementById('keyText').innerText = "key67";
-            document.getElementById('keyDisplay').style.display = "block";
-            alert("Key Generated for: " + document.getElementById('time').value);
+    <div class="footer-text">JORDAN ELITE SYSTEM &copy; 2026</div>
+</div>
+
+<script>
+    function generateKey() {
+        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        
+        // Helper to make random strings
+        function randomStr(len) {
+            let res = '';
+            for (let i = 0; i < len; i++) {
+                res += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return res;
         }
-    </script>
+
+        // Format: sdfjsdif78437758-3okkdfum9j3
+        const part1 = randomStr(16);
+        const part2 = randomStr(11);
+        const finalKey = part1 + "-" + part2;
+
+        // Calculate Expiration
+        const days = parseInt(document.getElementById('duration').value);
+        const expiryTime = Date.now() + (days * 24 * 60 * 60 * 1000);
+
+        // Save to LocalStorage so the Cookie Clicker script can see it
+        localStorage.setItem('jordan_key', finalKey);
+        localStorage.setItem('jordan_expiry', expiryTime);
+
+        // UI Update
+        const keyText = document.getElementById('keyText');
+        keyText.innerText = finalKey;
+        document.getElementById('keyBox').style.display = 'block';
+
+        // Copy to Clipboard
+        navigator.clipboard.writeText(finalKey).then(() => {
+            console.log('Key copied!');
+        });
+    }
+</script>
+
 </body>
 </html>
