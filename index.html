@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JORDAN ELITE | KEY SYSTEM</title>
+    <style>
+        body { background: #0a0a0a; color: #0f0; font-family: 'Courier New', monospace; text-align: center; padding-top: 50px; }
+        .box { border: 2px solid #333; display: inline-block; padding: 20px; background: #111; border-radius: 10px; }
+        select, button { padding: 10px; margin: 10px; background: #222; color: #0f0; border: 1px solid #0f0; cursor: pointer; }
+        #keyDisplay { margin-top: 20px; font-weight: bold; font-size: 20px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>JORDAN ELITE ACCESS</h1>
+        <p>Select your access duration:</p>
+        <select id="time">
+            <option>1 Day</option>
+            <option>1 Month</option>
+            <option>1 Year</option>
+            <option>Lifetime</option>
+        </select>
+        <br>
+        <button onclick="generateKey()">GENERATE KEY</button>
+        <div id="keyDisplay">YOUR KEY: <span id="keyText"></span></div>
+    </div>
+
+    <script>
+        function generateKey() {
+            document.getElementById('keyText').innerText = "key67";
+            document.getElementById('keyDisplay').style.display = "block";
+            alert("Key Generated for: " + document.getElementById('time').value);
+        }
+    </script>
+</body>
+</html>
